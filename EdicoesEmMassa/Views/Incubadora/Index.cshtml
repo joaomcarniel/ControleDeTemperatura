@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Cadastro de Incubadoras";
+}
+<div class="text-center">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary" role="button" asp-controller="Incubadora" asp-action="Create">Adicionar Incubadora</a>
+    </div>
+    <br />
+
+    <h1 class="display-4">Listagem de Incubadoras</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Id Incubadora</th>
+          <th scope="col">Código Incubadora</th>
+          <th scope="col">Temperatura Atual Fixada</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">0201</th>
+          <td>0201</td>
+          <td>Otto</td>
+          <td>
+            <div class="btn-group" role="group">
+              <a role="button" class="btn btn-primary" asp-controller="Incubadora" asp-action="Update">Editar</a>
+              <a role="button" class="btn btn-danger" asp-controller="Incubadora" asp-action="ConfirmDelete">Deletar</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">0202</th>
+          <td>0202</td>
+          <td>Thornton</td>
+          <td>
+            <div class="btn-group" role="group">
+              <a role="button" class="btn btn-primary" asp-controller="Incubadora" asp-action="Update">Editar</a>
+              <a role="button" class="btn btn-danger" asp-controller="Incubadora" asp-action="ConfirmDelete">Deletar</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">0203</th>
+          <td>0203</td>
+          <td>Thornton</td>
+          <td>
+            <div class="btn-group" role="group">
+              <a role="button" class="btn btn-primary" asp-controller="Incubadora" asp-action="Update">Editar</a>
+              <a role="button" class="btn btn-danger" asp-controller="Incubadora" asp-action="ConfirmDelete">Deletar</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+
+
