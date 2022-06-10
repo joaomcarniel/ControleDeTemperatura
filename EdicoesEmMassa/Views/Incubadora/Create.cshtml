@@ -1,4 +1,6 @@
-﻿@{
+﻿@using EdicoesEmMassa.Model
+@model IncubadoraModel 
+@{
     ViewData["Title"] = "Cadastrar Incubadora";
 }
 <div class="text-center">
@@ -7,14 +9,14 @@
     
 </div>
 
-<form>
+<form asp-controller="Incubadora" asp-action="Creating" method="post">
   <div class="form-group">
     <label for="codIncubadora">Código da Incubadora</label>
-    <input type="text" class="form-control" placeholder="Digite o código da Incubadora">
+    <input type="text" asp-for="CodIncubadora" class="form-control" placeholder="Digite o código da Incubadora">
   </div>
   <div class="form-group">
     <label for="tempAtualFixada">Temperatura Atual Fixada</label>
-    <input type="text" class="form-control" placeholder="Digite a temperatura atual em que a Incubadora está trabalhando agora">
+    <input type="text" asp-for="TemperaturaFixada" class="form-control" placeholder="Digite a temperatura atual em que a Incubadora está trabalhando agora">
   </div>
   <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
   <a class="btn btn-secondary btn-block" asp-controller="Incubadora" asp-action="Index" role="button">Voltar</a>

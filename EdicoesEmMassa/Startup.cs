@@ -2,6 +2,7 @@ using EdicoesEmMassa.DataContext;
 using EdicoesEmMassa.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,8 +26,9 @@ namespace EdicoesEmMassa
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddEntityFrameworkMySql().AddDbContext<jupiterContext>();
-            services.AddScoped<InterIncubadoraRepository, IncubadoraRepository>();
+            services.AddEntityFrameworkSqlServer()
+                .AddDbContext<bancoContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DataBase")));
+            services.AddScoped<IIncubadoraRepository, IncubadoraRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,6 @@
-﻿@{
+﻿@using EdicoesEmMassa.Model
+@model List<IncubadoraModel>
+@{
     ViewData["Title"] = "Cadastro de Incubadoras";
 }
 <div class="text-center">
@@ -18,40 +20,24 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">0201</th>
-          <td>0201</td>
-          <td>Otto</td>
-          <td>
-            <div class="btn-group" role="group">
-              <a role="button" class="btn btn-primary" asp-controller="Incubadora" asp-action="Update">Editar</a>
-              <a role="button" class="btn btn-danger" asp-controller="Incubadora" asp-action="ConfirmDelete">Deletar</a>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">0202</th>
-          <td>0202</td>
-          <td>Thornton</td>
-          <td>
-            <div class="btn-group" role="group">
-              <a role="button" class="btn btn-primary" asp-controller="Incubadora" asp-action="Update">Editar</a>
-              <a role="button" class="btn btn-danger" asp-controller="Incubadora" asp-action="ConfirmDelete">Deletar</a>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">0203</th>
-          <td>0203</td>
-          <td>Thornton</td>
-          <td>
-            <div class="btn-group" role="group">
-              <a role="button" class="btn btn-primary" asp-controller="Incubadora" asp-action="Update">Editar</a>
-              <a role="button" class="btn btn-danger" asp-controller="Incubadora" asp-action="ConfirmDelete">Deletar</a>
-            </div>
-          </td>
-        </tr>
-      </tbody>
+            @if(Model != null && Model.Any())
+            {
+                foreach(var incubadora in Model)
+                {
+                    <tr>
+                      <th scope="row">@incubadora.IdIncubadora</th>
+                      <td>@incubadora.CodIncubadora</td>
+                      <td>@incubadora.TemperaturaFixada</td>
+                      <td>
+                        <div class="btn-group" role="group">
+                          <a role="button" class="btn btn-primary" asp-route-id="@incubadora.IdIncubadora" asp-controller="Incubadora" asp-action="Update">Editar</a>
+                          <a role="button" class="btn btn-danger" asp-route-id="@incubadora.IdIncubadora" asp-controller="Incubadora" asp-action="ConfirmDelete">Deletar</a>
+                        </div>
+                      </td>
+                    </tr>
+                }
+            }
+        </tbody>
     </table>
 </div>
 

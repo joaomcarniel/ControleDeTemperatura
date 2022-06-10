@@ -6,15 +6,16 @@ namespace EdicoesEmMassa.Controllers
 {
     public class IncubadoraController : Controller
     {
-        private readonly InterIncubadoraRepository _incubadoraRepository;
+        private readonly IIncubadoraRepository _incubadoraRepository;
 
-        public IncubadoraController(InterIncubadoraRepository incubadoraRepository)
+        public IncubadoraController(IIncubadoraRepository incubadoraRepository)
         {
             _incubadoraRepository = incubadoraRepository;
         }
         public IActionResult Index()
         {
-            return View();
+            var incubadoras = _incubadoraRepository.GetAll();
+            return View(incubadoras);
         }
 
         public IActionResult Create()
@@ -33,7 +34,7 @@ namespace EdicoesEmMassa.Controllers
         }
 
         [HttpPost]
-        public IActionResult Creating(Incubadora incubadora)
+        public IActionResult Creating(IncubadoraModel incubadora)
         {
             _incubadoraRepository.Creating(incubadora);
             return RedirectToAction("Index");
