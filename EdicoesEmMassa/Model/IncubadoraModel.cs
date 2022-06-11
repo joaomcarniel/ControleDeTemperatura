@@ -10,7 +10,9 @@ namespace EdicoesEmMassa.Model
     {
         [Key]
         public int IdIncubadora { get; set; }
+        [Required(ErrorMessage = "Digite o Código da Incubadora")]
         public string CodIncubadora { get; set; }
+        [Required (ErrorMessage = "Digite a temperatura ideal")]
         public double TemperaturaFixada { get; set; }
     }
 }

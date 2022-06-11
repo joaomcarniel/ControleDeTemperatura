@@ -18,26 +18,53 @@ namespace EdicoesEmMassa.Controllers
             return View(incubadoras);
         }
 
-        public IActionResult Create()
+        public IActionResult Creating()
         {
             return View();
         }
 
-        public IActionResult Update()
+        public IActionResult Update(int id)
         {
-            return View();
+            var Incubadora = _incubadoraRepository.GetById(id);
+            return View(Incubadora);
         }
 
-        public IActionResult ConfirmDelete()
+        public IActionResult ConfirmDelete(int id)
         {
-            return View();
+            var Incubadora = _incubadoraRepository.GetById(id);
+            return View(Incubadora);
+        }
+        public IActionResult Delete(int id)
+        {
+            _incubadoraRepository.Delete(id);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         public IActionResult Creating(IncubadoraModel incubadora)
         {
-            _incubadoraRepository.Creating(incubadora);
-            return RedirectToAction("Index");
+
+            if (ModelState.IsValid)
+            {
+                _incubadoraRepository.Creating(incubadora);
+                return RedirectToAction("Index");
+            }
+
+            return View(incubadora);
+            
+        }
+
+        [HttpPost]
+        public IActionResult Update(IncubadoraModel incubadora)
+        {
+            if (ModelState.IsValid)
+            {
+                _incubadoraRepository.Update(incubadora);
+                return RedirectToAction("Index");
+            }
+
+            return View(incubadora);
+            
         }
     }
 }

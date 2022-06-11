@@ -11,6 +11,7 @@ namespace EdicoesEmMassa.DataContext
         }
 
         public DbSet<IncubadoraModel> Incubadora { get; set; }
+        public DbSet<TemperaturaModel> Temperatura { get; set; }
 
     }
 }

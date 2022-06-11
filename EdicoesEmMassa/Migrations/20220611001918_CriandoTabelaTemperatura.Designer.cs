@@ -4,14 +4,16 @@ using EdicoesEmMassa.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EdicoesEmMassa.Migrations
 {
     [DbContext(typeof(bancoContext))]
-    partial class bancoContextModelSnapshot : ModelSnapshot
+    [Migration("20220611001918_CriandoTabelaTemperatura")]
+    partial class CriandoTabelaTemperatura
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

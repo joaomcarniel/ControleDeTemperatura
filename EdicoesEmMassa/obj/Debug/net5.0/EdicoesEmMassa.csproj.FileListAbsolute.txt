@@ -353,7 +353,6 @@ C:\Fonts\EdicoesEmMassa\EdicoesEmMassa\obj\Debug\net5.0\EdicoesEmMassa.pdb
 C:\Fonts\EdicoesEmMassa\EdicoesEmMassa\obj\Debug\net5.0\EdicoesEmMassa.genruntimeconfig.cache
 C:\Fonts\EdicoesEmMassa\EdicoesEmMassa\obj\Debug\net5.0\ref\EdicoesEmMassa.dll
 C:\Fonts\EdicoesEmMassa\EdicoesEmMassa\obj\Debug\net5.0\Razor\Views\Incubadora\Index.cshtml.g.cs
-C:\Fonts\EdicoesEmMassa\EdicoesEmMassa\obj\Debug\net5.0\Razor\Views\Incubadora\Create.cshtml.g.cs
 C:\Fonts\EdicoesEmMassa\EdicoesEmMassa\obj\Debug\net5.0\Razor\Views\Incubadora\Update.cshtml.g.cs
 C:\Fonts\EdicoesEmMassa\EdicoesEmMassa\obj\Debug\net5.0\Razor\Views\Incubadora\ConfirmDelete.cshtml.g.cs
 C:\Fonts\EdicoesEmMassa\EdicoesEmMassa\bin\Debug\net5.0\Humanizer.dll
@@ -388,3 +387,5 @@ C:\Fonts\EdicoesEmMassa\EdicoesEmMassa\bin\Debug\net5.0\runtimes\win-x86\native\
 C:\Fonts\EdicoesEmMassa\EdicoesEmMassa\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Fonts\EdicoesEmMassa\EdicoesEmMassa\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Fonts\EdicoesEmMassa\EdicoesEmMassa\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Fonts\EdicoesEmMassa\EdicoesEmMassa\obj\Debug\net5.0\Razor\Views\Incubadora\Creating.cshtml.g.cs
+C:\Fonts\EdicoesEmMassa\EdicoesEmMassa\obj\Debug\net5.0\Razor\Views\Dashboard\index.cshtml.g.cs
