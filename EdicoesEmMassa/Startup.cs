@@ -29,6 +29,7 @@ namespace EdicoesEmMassa
             services.AddEntityFrameworkSqlServer()
                 .AddDbContext<bancoContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DataBase")));
             services.AddScoped<IIncubadoraRepository, IncubadoraRepository>();
+            services.AddScoped<ITemperaturaRepository, TemperaturaRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

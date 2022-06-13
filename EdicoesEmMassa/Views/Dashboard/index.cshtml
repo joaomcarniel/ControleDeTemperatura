@@ -1,5 +1,5 @@
 ﻿@using EdicoesEmMassa.Model
-@model List<IncubadoraModel>
+@model List<IncubadoraTemperaturaModel>
 @{
     ViewData["Title"] = "Cadastro de Incubadoras";
 }
@@ -10,23 +10,23 @@
         
         @if(Model != null && Model.Any())
         {
-            foreach(var incubadora in Model)
+            foreach(var temperatura in Model)
             {
                     var color = "";
-                    @if(incubadora.TemperaturaFixada > 30)
+                    @if(temperatura.Incubadora.TemperaturaFixada  > 30)
                     {
                         color = "bg-danger";
                     }
-                    @if(incubadora.TemperaturaFixada <= 30)
+                    @if(temperatura.Incubadora.TemperaturaFixada <= 30)
                     {
                         color = "bg-success";
                     }
 
                     <div class="card col-sm-3 @color">
                         <div class="card-body">
-                        <h5 class="card-title">@incubadora.TemperaturaFixada ºc</h5>
-                        <p class="card-text">Temperatura Ideal: @incubadora.TemperaturaFixada ºc</p>
-                        <p class="card-text">Incubadora código: @incubadora.CodIncubadora</p>
+                        <h5 class="card-title">@temperatura.Temperatura.TemperaturaAtual ºc</h5>
+                        <p class="card-text">Temperatura Ideal: @temperatura.Incubadora.TemperaturaFixada ºc</p>
+                        <p class="card-text">Incubadora código: @temperatura.Incubadora.CodIncubadora</p>
                         <a href="#" class="btn btn-primary">Editar Incubadora</a>
                     </div>
                 </div>
