@@ -22,6 +22,7 @@ namespace EdicoesEmMassa
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSwaggerGen();
 
             var UseSQLServer = false;
            if (UseSQLServer)
@@ -50,6 +51,9 @@ namespace EdicoesEmMassa
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseStaticFiles();
 
