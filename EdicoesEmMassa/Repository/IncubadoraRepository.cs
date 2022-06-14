@@ -1,5 +1,8 @@
 ﻿using EdicoesEmMassa.DataContext;
+using EdicoesEmMassa.Entity;
 using EdicoesEmMassa.Model;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,20 +16,57 @@ namespace EdicoesEmMassa.Repository
             _dbContext = dbContext;
         }
 
-        public IncubadoraModel Creating(IncubadoraModel incubadora)
+        public Incubadora CreateById(InputTemperaturaByID input)
         {
-            _dbContext.Incubadora.Add(incubadora);
+            Incubadora incubadoradb = GetById(input.Id);
+
+            if (incubadoradb == null)
+            {
+                throw new System.Exception("Houve um erro na atualização da Incubadora");
+            }
+            incubadoradb.TemperaturaAtual = input.TemperaturaAtual;
+
+            incubadoradb.Historicos.Add(new TemperaturaHistorico()
+            {
+                DataCriacao = DateTime.UtcNow.AddHours(-3),
+                TemperaturaAtual = input.TemperaturaAtual,
+            });
             _dbContext.SaveChanges();
-            return incubadora;
+            return incubadoradb;
+        }
+
+        public Incubadora CreateByName(InputTemperaturaByName input)
+        {
+            Incubadora incubadoradb = _dbContext.Incubadora.FirstOrDefault(x => x.Name == input.Name);
+
+            if (incubadoradb == null)
+            {
+                incubadoradb = new Incubadora()
+                {
+                    DataCriacao = DateTime.UtcNow.AddHours(-3),
+                    Name = input.Name,
+                    TemperaturaIdeal = Configuracoes.TemperaturaIdealPadrao
+                };
+            }
+
+            incubadoradb.Historicos.Add(new TemperaturaHistorico()
+            {
+                DataCriacao = DateTime.UtcNow.AddHours(-3),
+                TemperaturaAtual = input.TemperaturaAtual,
+            });
+
+            incubadoradb.TemperaturaAtual = input.TemperaturaAtual;
+            _dbContext.SaveChanges();
+            return incubadoradb;
         }
 
         public bool Delete(int id)
         {
-            IncubadoraModel incubadoradb = GetById(id);
+            Incubadora incubadoradb = GetById(id);
 
             if (incubadoradb == null)
             {
-                throw new System.Exception("Hou um erro na atualização da Incubadora");
+                throw new System.Exception("Houve um erro na atualização da Incubadora");
             }
 
             _dbContext.Incubadora.Remove(incubadoradb);
@@ -35,27 +75,27 @@ namespace EdicoesEmMassa.Repository
             return true;
         }
 
-        public List<IncubadoraModel> GetAll()
+        public List<Incubadora> GetAll()
         {
             return _dbContext.Incubadora.ToList();
         }
 
-        public IncubadoraModel GetById(int id)
+        public Incubadora GetById(int id)
         {
-            return _dbContext.Incubadora.FirstOrDefault(x => x.IdIncubadora == id);
+            return _dbContext.Incubadora.FirstOrDefault(x => x.Id == id);
         }
 
-        public IncubadoraModel Update(IncubadoraModel incubadora)
+        public Incubadora Update(Incubadora incubadora)
         {
-            IncubadoraModel incubadoradb = GetById(incubadora.IdIncubadora);
+            Incubadora incubadoradb = GetById(incubadora.Id);
 
             if (incubadoradb == null)
             {
-                throw new System.Exception("Hou um erro na atualização da Incubadora");
+                throw new System.Exception("Houve um erro na atualização da Incubadora");
             }
 
-            incubadoradb.CodIncubadora = incubadora.CodIncubadora;
-            incubadoradb.TemperaturaFixada = incubadora.TemperaturaFixada;
+            _dbContext.Incubadora.Attach(incubadora);
+            _dbContext.Entry(incubadora).State = EntityState.Modified;
 
             _dbContext.Incubadora.Update(incubadoradb);
             _dbContext.SaveChanges();

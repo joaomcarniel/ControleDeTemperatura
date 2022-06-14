@@ -3,6 +3,7 @@ using System;
 using EdicoesEmMassa.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EdicoesEmMassa.Migrations
 {
     [DbContext(typeof(bancoContext))]
-    partial class bancoContextModelSnapshot : ModelSnapshot
+    [Migration("20220614035819_CriacaoInicial")]
+    partial class CriacaoInicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

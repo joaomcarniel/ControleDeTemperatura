@@ -1,14 +1,16 @@
-﻿using EdicoesEmMassa.Model;
+﻿using EdicoesEmMassa.Entity;
+using EdicoesEmMassa.Model;
 using System.Collections.Generic;
 
 namespace EdicoesEmMassa.Repository
 {
     public interface IIncubadoraRepository
     {
-        IncubadoraModel Creating(IncubadoraModel incubadora);
-        List<IncubadoraModel> GetAll();
-        IncubadoraModel GetById(int id);
-        IncubadoraModel Update(IncubadoraModel incubadora);
+        Incubadora CreateByName(InputTemperaturaByName input);
+        Incubadora CreateById(InputTemperaturaByID input);
+        List<Incubadora> GetAll();
+        Incubadora GetById(int id);
+        Incubadora Update(Incubadora incubadora);
         bool Delete(int id);
     }
 }

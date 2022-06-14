@@ -1,40 +1,41 @@
-﻿@using EdicoesEmMassa.Model
-@model List<IncubadoraTemperaturaModel>
+﻿@using EdicoesEmMassa.Entity
+@using EdicoesEmMassa.Model
+@model List<Incubadora>
 @{
     ViewData["Title"] = "Cadastro de Incubadoras";
 }
-<div class="text-center">
-    <h1 class="display-4">Dashboard</h1>
-    <tbody>
+<h1 class="display-4">Dashboard</h1>
+<tbody class="text-center">
     <div class="row">
-        
-        @if(Model != null && Model.Any())
-        {
-            foreach(var temperatura in Model)
-            {
-                    var color = "";
-                    @if(temperatura.Incubadora.TemperaturaFixada  > 30)
-                    {
-                        color = "bg-danger";
-                    }
-                    @if(temperatura.Incubadora.TemperaturaFixada <= 30)
-                    {
-                        color = "bg-success";
-                    }
 
-                    <div class="card col-sm-3 @color">
-                        <div class="card-body">
-                        <h5 class="card-title">@temperatura.Temperatura.TemperaturaAtual ºc</h5>
-                        <p class="card-text">Temperatura Ideal: @temperatura.Incubadora.TemperaturaFixada ºc</p>
-                        <p class="card-text">Incubadora código: @temperatura.Incubadora.CodIncubadora</p>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var temperatura in Model)
+            {
+                var color = "";
+                var diferenca = temperatura.TemperaturaAtual - temperatura.TemperaturaIdeal;
+
+                @if (diferenca > Configuracoes.ToleranciaAceitavel || diferenca < -Configuracoes.ToleranciaAceitavel)
+                {
+                    color = "bg-danger";
+                }
+                else
+                {
+                    color = "bg-success";
+                }
+
+                <div class="card col-sm-3 @color">
+                    <div class="card-body">
+                        <h5 class="card-title">@temperatura.TemperaturaAtual ºc</h5>
+                        <p class="card-text">Temperatura Ideal: @temperatura.TemperaturaIdeal ºc</p>
+                        <p class="card-text">Incubadora código: @temperatura.Id</p>
                         <a href="#" class="btn btn-primary">Editar Incubadora</a>
                     </div>
                 </div>
             }
         }
-    </tbody>
     </div>
-</div>
+</tbody>
 
 
 

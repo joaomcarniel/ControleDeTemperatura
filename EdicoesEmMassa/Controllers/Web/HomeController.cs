@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
-namespace EdicoesEmMassa.Controllers
+namespace EdicoesEmMassa.Controllers.Web
 {
     public class HomeController : Controller
     {

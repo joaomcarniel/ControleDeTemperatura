@@ -1,11 +1,11 @@
-﻿using EdicoesEmMassa.Model;
+﻿using EdicoesEmMassa.Entity;
 using System.Collections.Generic;
 
 namespace EdicoesEmMassa.Repository
 {
     public interface ITemperaturaRepository
     {
-        List<TemperaturaModel> GetAll();
-        TemperaturaModel GetById(int id);
+        List<TemperaturaHistorico> GetAll();
+        TemperaturaHistorico GetById(int id);
     }
 }

@@ -1,0 +1,36 @@
+﻿@model EdicoesEmMassa.Entity.TemperaturaHistorico
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>TemperaturaHistorico</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TemperaturaAtual)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TemperaturaAtual)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataCriacao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataCriacao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Incubadora)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Incubadora.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
