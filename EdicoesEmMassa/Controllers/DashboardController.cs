@@ -7,10 +7,10 @@ namespace EdicoesEmMassa.Controllers
 {
     public class DashboardController : Controller
     {
-        
+
         private readonly IIncubadoraRepository _incubadoraRepository;
         private readonly ITemperaturaRepository _temperaturaRepository;
-        
+
 
         public DashboardController(IIncubadoraRepository incubadoraRepository, ITemperaturaRepository temperaturaRepository)
         {
@@ -26,18 +26,18 @@ namespace EdicoesEmMassa.Controllers
             var temperaturas = _temperaturaRepository.GetAll();
             var incubadoras = _incubadoraRepository.GetAll();
 
-            foreach(var temperatura in temperaturas)
+            foreach (var temperatura in temperaturas)
             {
                 foreach (var incubadora in incubadoras)
                 {
-                    if(incubadora.IdIncubadora == temperatura.Incubadora.IdIncubadora)
+                    if (incubadora.IdIncubadora == temperatura.Incubadora.IdIncubadora)
                     {
                         IncubadoraTemperaturaModel itModel = new IncubadoraTemperaturaModel()
                         {
                             Temperatura = temperatura,
                             Incubadora = incubadora
                         };
-                        _ITModel.Add(itModel);   
+                        _ITModel.Add(itModel);
                     }
                 }
             }

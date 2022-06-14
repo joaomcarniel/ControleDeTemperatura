@@ -51,7 +51,7 @@ namespace EdicoesEmMassa.Controllers
             }
 
             return View(incubadora);
-            
+
         }
 
         [HttpPost]
@@ -64,7 +64,7 @@ namespace EdicoesEmMassa.Controllers
             }
 
             return View(incubadora);
-            
+
         }
     }
 }

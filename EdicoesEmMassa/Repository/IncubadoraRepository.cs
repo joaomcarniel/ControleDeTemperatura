@@ -49,7 +49,7 @@ namespace EdicoesEmMassa.Repository
         {
             IncubadoraModel incubadoradb = GetById(incubadora.IdIncubadora);
 
-            if(incubadoradb == null)
+            if (incubadoradb == null)
             {
                 throw new System.Exception("Hou um erro na atualização da Incubadora");
             }

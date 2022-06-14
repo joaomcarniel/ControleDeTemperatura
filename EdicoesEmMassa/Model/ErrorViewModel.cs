@@ -1,6 +1,4 @@
-using System;
-
-namespace EdicoesEmMassa.Models
+namespace EdicoesEmMassa.Model
 {
     public class ErrorViewModel
     {
