@@ -1,5 +1,6 @@
 ﻿using EdicoesEmMassa.DataContext;
 using EdicoesEmMassa.Model;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,7 +15,11 @@ namespace EdicoesEmMassa.Repository
         }
         public List<TemperaturaModel> GetAll()
         {
-            return _dbContext.Temperatura.ToList();
+            return _dbContext.Temperatura.FromSqlRaw(@"SELECT IdTemperatura,temperaturaAtual, abacate.IncubadoraIdIncubadora from temperatura
+                        JOIN(
+                        SELECT MAX(IdTemperatura) as ""ultimoId"", IncubadoraIdIncubadora from temperatura
+                        GROUP BY IncubadoraIdIncubadora) ""abacate""
+                        ON abacate.ultimoId = temperatura.IdTemperatura").ToList();
         }
         public TemperaturaModel GetById(int id)
         {

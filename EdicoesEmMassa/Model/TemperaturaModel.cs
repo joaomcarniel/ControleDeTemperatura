@@ -9,6 +9,7 @@ namespace EdicoesEmMassa.Model
         [Required(ErrorMessage = "Digite o Código da Incubadora")]
         public IncubadoraModel Incubadora { get; set; }
         [Required(ErrorMessage = "Digite a temperatura atual")]
+        public int IncubadoraIdIncubadora { get; set; }
         public double TemperaturaAtual { get; set; }
     }
 }

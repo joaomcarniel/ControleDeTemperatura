@@ -20,30 +20,24 @@ namespace EdicoesEmMassa.Controllers
 
         public IActionResult Index()
         {
-            List<IncubadoraTemperaturaModel> _ITModel;
+            List<IncubadoraTemperaturaModel> _ITModel = new List<IncubadoraTemperaturaModel>();
             IncubadoraModel incubModel = new IncubadoraModel();
             TemperaturaModel tempModel = new TemperaturaModel();
             var temperaturas = _temperaturaRepository.GetAll();
             var incubadoras = _incubadoraRepository.GetAll();
 
-            for(int i = 1; i < temperaturas.Count; i++)
+            foreach(var temperatura in temperaturas)
             {
                 foreach (var incubadora in incubadoras)
                 {
-                    if(incubadora.IdIncubadora == temperaturas[i].Incubadora.IdIncubadora)
+                    if(incubadora.IdIncubadora == temperatura.Incubadora.IdIncubadora)
                     {
-                        incubModel.IdIncubadora = incubadora.IdIncubadora;
-                        incubModel.CodIncubadora = incubadora.CodIncubadora;
-                        incubModel.TemperaturaFixada = incubadora.TemperaturaFixada;
-
-                        tempModel.IdTemperatura = temperaturas[i].IdTemperatura;
-                        tempModel.TemperaturaAtual = temperaturas[i].TemperaturaAtual;
-                        tempModel.Incubadora = temperaturas[i].Incubadora;
-
-                        _ITModel.AddRange(incubModel, tempModel);
-                        //_ITModel[i].Temperatura = tempModel;
-                        //_ITModel.Temperatura = (List<TemperaturaModel>)tempModel;
-                        //_ITModel.Incubadora.Add(incubModel);
+                        IncubadoraTemperaturaModel itModel = new IncubadoraTemperaturaModel()
+                        {
+                            Temperatura = temperatura,
+                            Incubadora = incubadora
+                        };
+                        _ITModel.Add(itModel);   
                     }
                 }
             }
