@@ -15,11 +15,13 @@ namespace EdicoesEmMassa.Repository
         }
         public List<TemperaturaModel> GetAll()
         {
-            return _dbContext.Temperatura.FromSqlRaw(@"SELECT IdTemperatura,temperaturaAtual, abacate.IncubadoraIdIncubadora from temperatura
-                        JOIN(
-                        SELECT MAX(IdTemperatura) as ""ultimoId"", IncubadoraIdIncubadora from temperatura
-                        GROUP BY IncubadoraIdIncubadora) ""abacate""
-                        ON abacate.ultimoId = temperatura.IdTemperatura").ToList();
+            return _dbContext.Temperatura.FromSqlRaw(@"
+                        SELECT ""IdTemperatura"", ""TemperaturaAtual"", ""abacate"".""IncubadoraIdIncubadora"" 
+                          FROM ""Temperatura""
+                          JOIN ( SELECT MAX(""IdTemperatura"") as ""ultimoId"", ""IncubadoraIdIncubadora"" 
+                                   FROM ""Temperatura""
+                                  GROUP BY ""IncubadoraIdIncubadora"") ""abacate""
+                            ON ""abacate"".""ultimoId"" = ""Temperatura"".""IdTemperatura""").ToList();
         }
         public TemperaturaModel GetById(int id)
         {

@@ -7,9 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EdicoesEmMassa
 {
@@ -21,13 +18,24 @@ namespace EdicoesEmMassa
         }
 
         public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddEntityFrameworkSqlServer()
+            services.AddSwaggerGen();
+
+            var UseSQLServer = false;
+           if (UseSQLServer)
+            {
+                services.AddEntityFrameworkSqlServer()
                 .AddDbContext<bancoContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DataBase")));
+            }
+            else
+            {
+                services.AddDbContext<bancoContext>(options =>
+                    options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnectionString")));
+            }
+
             services.AddScoped<IIncubadoraRepository, IncubadoraRepository>();
             services.AddScoped<ITemperaturaRepository, TemperaturaRepository>();
         }
@@ -43,6 +51,10 @@ namespace EdicoesEmMassa
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
             app.UseStaticFiles();
 
             app.UseRouting();

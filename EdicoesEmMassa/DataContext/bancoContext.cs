@@ -7,7 +7,7 @@ namespace EdicoesEmMassa.DataContext
     {
         public bancoContext(DbContextOptions<bancoContext> options) : base(options)
         {
-
+            Database.EnsureCreated();
         }
 
         public DbSet<IncubadoraModel> Incubadora { get; set; }

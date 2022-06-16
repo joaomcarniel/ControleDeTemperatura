@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -12,7 +10,7 @@ namespace EdicoesEmMassa.Model
         public int IdIncubadora { get; set; }
         [Required(ErrorMessage = "Digite o Código da Incubadora")]
         public string CodIncubadora { get; set; }
-        [Required (ErrorMessage = "Digite a temperatura ideal")]
+        [Required(ErrorMessage = "Digite a temperatura ideal")]
         public double TemperaturaFixada { get; set; }
     }
 }
