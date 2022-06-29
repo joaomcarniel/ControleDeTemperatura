@@ -34,6 +34,7 @@ namespace EdicoesEmMassa
             {
                 services.AddDbContext<bancoContext>(options =>
                     options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnectionString")));
+                    
             }
 
             services.AddScoped<IIncubadoraRepository, IncubadoraRepository>();

@@ -23,14 +23,14 @@ namespace EdicoesEmMassa.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TemperaturaModel>>> GetTemperatura()
         {
-            return await _context.Temperatura.ToListAsync();
+            return await _context.temperatura.ToListAsync();
         }
 
         // GET: api/Temperatura/5
         [HttpGet("{id}")]
         public async Task<ActionResult<TemperaturaModel>> GetTemperaturaModel(int id)
         {
-            var temperaturaModel = await _context.Temperatura.FindAsync(id);
+            var temperaturaModel = await _context.temperatura.FindAsync(id);
 
             if (temperaturaModel == null)
             {
@@ -45,7 +45,7 @@ namespace EdicoesEmMassa.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTemperaturaModel(int id, TemperaturaModel temperaturaModel)
         {
-            if (id != temperaturaModel.IdTemperatura)
+            if (id != temperaturaModel.id_temperatura)
             {
                 return BadRequest();
             }
@@ -76,23 +76,23 @@ namespace EdicoesEmMassa.Controllers
         [HttpPost]
         public async Task<ActionResult<TemperaturaModel>> PostTemperaturaModel(TemperaturaModel temperaturaModel)
         {
-            _context.Temperatura.Add(temperaturaModel);
+            _context.temperatura.Add(temperaturaModel);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTemperaturaModel", new { id = temperaturaModel.IdTemperatura }, temperaturaModel);
+            return CreatedAtAction("GetTemperaturaModel", new { id = temperaturaModel.id_temperatura }, temperaturaModel);
         }
 
         // DELETE: api/Temperatura/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTemperaturaModel(int id)
         {
-            var temperaturaModel = await _context.Temperatura.FindAsync(id);
+            var temperaturaModel = await _context.temperatura.FindAsync(id);
             if (temperaturaModel == null)
             {
                 return NotFound();
             }
 
-            _context.Temperatura.Remove(temperaturaModel);
+            _context.temperatura.Remove(temperaturaModel);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -100,7 +100,7 @@ namespace EdicoesEmMassa.Controllers
 
         private bool TemperaturaModelExists(int id)
         {
-            return _context.Temperatura.Any(e => e.IdTemperatura == id);
+            return _context.temperatura.Any(e => e.id_temperatura == id);
         }
     }
 }

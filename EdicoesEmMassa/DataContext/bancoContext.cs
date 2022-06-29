@@ -10,14 +10,14 @@ namespace EdicoesEmMassa.DataContext
             Database.EnsureCreated();
         }
 
-        public DbSet<IncubadoraModel> Incubadora { get; set; }
-        public DbSet<TemperaturaModel> Temperatura { get; set; }
-        public DbSet<Abacate> Abacate { get; set; }
+        public DbSet<IncubadoraModel> incubadora { get; set; }
+        public DbSet<TemperaturaModel> temperatura { get; set; }
+        //public DbSet<Abacate> Abacate { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Abacate>().HasNoKey();
+            //modelBuilder.Entity<Abacate>().HasNoKey();
         }
 
     }

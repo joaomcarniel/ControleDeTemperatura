@@ -2,6 +2,7 @@
 using EdicoesEmMassa.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace EdicoesEmMassa.Controllers
 {
@@ -23,25 +24,30 @@ namespace EdicoesEmMassa.Controllers
             List<IncubadoraTemperaturaModel> _ITModel = new List<IncubadoraTemperaturaModel>();
             IncubadoraModel incubModel = new IncubadoraModel();
             TemperaturaModel tempModel = new TemperaturaModel();
-            var temperaturas = _temperaturaRepository.GetAll();
-            var incubadoras = _incubadoraRepository.GetAll();
-
-            foreach (var temperatura in temperaturas)
+            while (true)
             {
-                foreach (var incubadora in incubadoras)
+                Thread.Sleep(50);
+                var temperaturas = _temperaturaRepository.GetAll();
+                var incubadoras = _incubadoraRepository.GetAll();
+
+                foreach (var temperatura in temperaturas)
                 {
-                    if (incubadora.IdIncubadora == temperatura.Incubadora.IdIncubadora)
+                    foreach (var incubadora in incubadoras)
                     {
-                        IncubadoraTemperaturaModel itModel = new IncubadoraTemperaturaModel()
+                        if (incubadora.id_incubadora == temperatura.id_incubadora)
                         {
-                            Temperatura = temperatura,
-                            Incubadora = incubadora
-                        };
-                        _ITModel.Add(itModel);
+                            IncubadoraTemperaturaModel itModel = new IncubadoraTemperaturaModel()
+                            {
+                                temperatura = temperatura,
+                                incubadora = incubadora
+                            };
+                            _ITModel.Add(itModel);
+                        }
                     }
                 }
+                return View(_ITModel);
             }
-            return View(_ITModel);
+            
         }
     }
 }

@@ -10,16 +10,16 @@
 </div>
 
 <form asp-controller="Incubadora" asp-action="Update" method="post">
-  <input type="hidden" asp-for="IdIncubadora" />
+  <input type="hidden" asp-for="id_incubadora" />
   <div class="form-group">
     <label for="codIncubadora">Código da Incubadora</label>
-    <input type="text" asp-for="CodIncubadora" class="form-control" placeholder="Digite o código da Incubadora">
-    @Html.ValidationMessageFor(x => x.CodIncubadora)  
+    <input type="text" asp-for="cod_incubadora" class="form-control" placeholder="Digite o código da Incubadora">
+    @Html.ValidationMessageFor(x => x.cod_incubadora)  
   </div>
   <div class="form-group">
     <label for="tempAtualFixada">Temperatura Atual Fixada</label>
-    <input type="text" asp-for="TemperaturaFixada" class="form-control" placeholder="Digite a temperatura atual em que a Incubadora está trabalhando agora">
-    @Html.ValidationMessageFor(x => x.TemperaturaFixada)  
+    <input type="text" asp-for="temperatura_fixada" class="form-control" placeholder="Digite a temperatura atual em que a Incubadora está trabalhando agora">
+    @Html.ValidationMessageFor(x => x.temperatura_fixada)  
   </div>
   <button type="submit" class="btn btn-primary btn-block">Alterar</button>
   <a class="btn btn-secondary btn-block" asp-controller="Incubadora" asp-action="Index" role="button">Voltar</a>

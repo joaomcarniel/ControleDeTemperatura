@@ -2,7 +2,7 @@
 {
     public class IncubadoraTemperaturaModel
     {
-        public IncubadoraModel Incubadora { get; set; }
-        public TemperaturaModel Temperatura { get; set; }
+        public IncubadoraModel incubadora { get; set; }
+        public TemperaturaModel temperatura { get; set; }
     }
 }

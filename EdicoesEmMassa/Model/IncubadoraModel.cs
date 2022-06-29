@@ -7,10 +7,10 @@ namespace EdicoesEmMassa.Model
     public partial class IncubadoraModel
     {
         [Key]
-        public int IdIncubadora { get; set; }
+        public int id_incubadora { get; set; }
         [Required(ErrorMessage = "Digite o Código da Incubadora")]
-        public string CodIncubadora { get; set; }
+        public string cod_incubadora { get; set; }
         [Required(ErrorMessage = "Digite a temperatura ideal")]
-        public double TemperaturaFixada { get; set; }
+        public double temperatura_fixada { get; set; }
     }
 }
