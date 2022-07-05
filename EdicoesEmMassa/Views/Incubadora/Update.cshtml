@@ -1,5 +1,5 @@
 ﻿@using EdicoesEmMassa.Model
-@model IncubadoraModel 
+@model Incubadora
 @{
     ViewData["Title"] = "Editar Incubadora";
 }
@@ -12,13 +12,13 @@
 <form asp-controller="Incubadora" asp-action="Update" method="post">
   <input type="hidden" asp-for="id_incubadora" />
   <div class="form-group">
-    <label for="codIncubadora">Código da Incubadora</label>
+    <label for="cod_incubadora">Código da Incubadora</label>
     <input type="text" asp-for="cod_incubadora" class="form-control" placeholder="Digite o código da Incubadora">
     @Html.ValidationMessageFor(x => x.cod_incubadora)  
   </div>
   <div class="form-group">
     <label for="tempAtualFixada">Temperatura Atual Fixada</label>
-    <input type="text" asp-for="temperatura_fixada" class="form-control" placeholder="Digite a temperatura atual em que a Incubadora está trabalhando agora">
+    <input type="text" asp-for="temperatura_fixada" class="form-control" placeholder="Digite a Temperatura atual em que a Incubadora está trabalhando agora">
     @Html.ValidationMessageFor(x => x.temperatura_fixada)  
   </div>
   <button type="submit" class="btn btn-primary btn-block">Alterar</button>

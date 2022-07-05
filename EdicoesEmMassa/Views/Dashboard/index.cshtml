@@ -1,5 +1,5 @@
 ﻿@using EdicoesEmMassa.Model
-@model List<IncubadoraTemperaturaModel>
+@model List<IncubadoraTemperatura>
 @{
     ViewData["Title"] = "Cadastro de Incubadoras";
 }
@@ -10,14 +10,14 @@
         
         @if(Model != null && Model.Any())
         {
-            foreach(var temperatura in Model)
+            foreach(var Temperatura in Model)
             {
                     var color = "";
-                    var tempAtual = temperatura.temperatura.temperatura_atual;
-                    var maxTempOk = temperatura.incubadora.temperatura_fixada + 0.6;
-                    var minTempOk = temperatura.incubadora.temperatura_fixada - 0.6;
-                    var maxTemp = temperatura.incubadora.temperatura_fixada + 1;
-                    var minTemp = temperatura.incubadora.temperatura_fixada - 1;
+                    var tempAtual = Temperatura.Temperatura.temperatura_atual;
+                    var maxTempOk = Temperatura.Incubadora.temperatura_fixada + 0.6;
+                    var minTempOk = Temperatura.Incubadora.temperatura_fixada - 0.6;
+                    var maxTemp = Temperatura.Incubadora.temperatura_fixada + 1;
+                    var minTemp = Temperatura.Incubadora.temperatura_fixada - 1;
                     if(tempAtual >= minTempOk && tempAtual <= maxTempOk)
                     {
                         color = "bg-success";
@@ -35,10 +35,10 @@
 
                     <div class="card col-sm-3 @color">
                         <div class="card-body">
-                        <h5 class="card-title">@temperatura.temperatura.temperatura_atual ºc</h5>
-                        <p class="card-text">Temperatura Ideal: @temperatura.incubadora.temperatura_fixada ºc</p>
-                        <p class="card-text">Incubadora código: @temperatura.incubadora.cod_incubadora</p>
-                        <a role="button" class="btn btn-primary" asp-route-id="@temperatura.incubadora.id_incubadora" asp-controller="Incubadora" asp-action="Update">Editar Incubadora</a>
+                        <h5 class="card-title">@Temperatura.Temperatura.temperatura_atual ºc</h5>
+                        <p class="card-text">Temperatura Ideal: @Temperatura.Incubadora.temperatura_fixada ºc</p>
+                        <p class="card-text">Incubadora código: @Temperatura.Incubadora.cod_incubadora</p>
+                        <a role="button" class="btn btn-primary" asp-route-id="@Temperatura.Incubadora.id_incubadora" asp-controller="Incubadora" asp-action="Update">Editar Incubadora</a>
                     </div>
                 </div>
             }

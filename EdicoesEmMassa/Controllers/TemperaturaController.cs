@@ -12,45 +12,45 @@ namespace EdicoesEmMassa.Controllers
     [ApiController]
     public class TemperaturaController : ControllerBase
     {
-        private readonly bancoContext _context;
+        private readonly jupiterContext _context;
 
-        public TemperaturaController(bancoContext context)
+        public TemperaturaController(jupiterContext context)
         {
             _context = context;
         }
 
         // GET: api/Temperatura
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TemperaturaModel>>> GetTemperatura()
+        public async Task<ActionResult<IEnumerable<Temperatura>>> GetTemperatura()
         {
-            return await _context.temperatura.ToListAsync();
+            return await _context.Temperaturas.ToListAsync();
         }
 
         // GET: api/Temperatura/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TemperaturaModel>> GetTemperaturaModel(int id)
+        public async Task<ActionResult<Temperatura>> GetTemperatura(int id)
         {
-            var temperaturaModel = await _context.temperatura.FindAsync(id);
+            var Temperatura = await _context.Temperaturas.FindAsync(id);
 
-            if (temperaturaModel == null)
+            if (Temperatura == null)
             {
                 return NotFound();
             }
 
-            return temperaturaModel;
+            return Temperatura;
         }
 
         // PUT: api/Temperatura/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTemperaturaModel(int id, TemperaturaModel temperaturaModel)
+        public async Task<IActionResult> PutTemperatura(int id, Temperatura Temperatura)
         {
-            if (id != temperaturaModel.id_temperatura)
+            if (id != Temperatura.id_temperatura)
             {
                 return BadRequest();
             }
 
-            _context.Entry(temperaturaModel).State = EntityState.Modified;
+            _context.Entry(Temperatura).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace EdicoesEmMassa.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TemperaturaModelExists(id))
+                if (!TemperaturaExists(id))
                 {
                     return NotFound();
                 }
@@ -74,33 +74,33 @@ namespace EdicoesEmMassa.Controllers
         // POST: api/Temperatura
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TemperaturaModel>> PostTemperaturaModel(TemperaturaModel temperaturaModel)
+        public async Task<ActionResult<Temperatura>> PostTemperatura(Temperatura Temperatura)
         {
-            _context.temperatura.Add(temperaturaModel);
+            _context.Temperaturas.Add(Temperatura);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTemperaturaModel", new { id = temperaturaModel.id_temperatura }, temperaturaModel);
+            return CreatedAtAction("GetTemperatura", new { id = Temperatura.id_temperatura }, Temperatura);
         }
 
         // DELETE: api/Temperatura/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTemperaturaModel(int id)
+        public async Task<IActionResult> DeleteTemperatura(int id)
         {
-            var temperaturaModel = await _context.temperatura.FindAsync(id);
-            if (temperaturaModel == null)
+            var Temperatura = await _context.Temperaturas.FindAsync(id);
+            if (Temperatura == null)
             {
                 return NotFound();
             }
 
-            _context.temperatura.Remove(temperaturaModel);
+            _context.Temperaturas.Remove(Temperatura);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool TemperaturaModelExists(int id)
+        private bool TemperaturaExists(int id)
         {
-            return _context.temperatura.Any(e => e.id_temperatura == id);
+            return _context.Temperaturas.Any(e => e.id_temperatura == id);
         }
     }
 }

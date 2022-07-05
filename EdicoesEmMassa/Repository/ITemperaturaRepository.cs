@@ -5,7 +5,7 @@ namespace EdicoesEmMassa.Repository
 {
     public interface ITemperaturaRepository
     {
-        List<TemperaturaModel> GetAll();
-        TemperaturaModel GetById(int id);
+        List<Temperatura> GetAll();
+        Temperatura GetById(int id);
     }
 }

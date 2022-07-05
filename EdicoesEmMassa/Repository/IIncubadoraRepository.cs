@@ -5,10 +5,10 @@ namespace EdicoesEmMassa.Repository
 {
     public interface IIncubadoraRepository
     {
-        IncubadoraModel Creating(IncubadoraModel incubadora);
-        List<IncubadoraModel> GetAll();
-        IncubadoraModel GetById(int id);
-        IncubadoraModel Update(IncubadoraModel incubadora);
+        Incubadora Creating(Incubadora Incubadora);
+        List<Incubadora> GetAll();
+        Incubadora GetById(int id);
+        Incubadora Update(Incubadora Incubadora);
         bool Delete(int id);
     }
 }

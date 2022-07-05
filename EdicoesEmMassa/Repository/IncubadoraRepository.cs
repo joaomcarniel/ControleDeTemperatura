@@ -7,60 +7,61 @@ namespace EdicoesEmMassa.Repository
 {
     public class IncubadoraRepository : IIncubadoraRepository
     {
-        private readonly bancoContext _dbContext;
-        public IncubadoraRepository(bancoContext dbContext)
+        private readonly jupiterContext _dbContext;
+        public IncubadoraRepository(jupiterContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public IncubadoraModel Creating(IncubadoraModel incubadora)
+        public Incubadora Creating(Incubadora Incubadora)
         {
-            _dbContext.incubadora.Add(incubadora);
+            _dbContext.Incubadoras.Add(Incubadora);
             _dbContext.SaveChanges();
-            return incubadora;
+            return Incubadora;
         }
 
         public bool Delete(int id)
         {
-            IncubadoraModel incubadoradb = GetById(id);
+            Incubadora Incubadoradb = GetById(id);
 
-            if (incubadoradb == null)
+            if (Incubadoradb == null)
             {
                 throw new System.Exception("Hou um erro na atualização da Incubadora");
             }
 
-            _dbContext.incubadora.Remove(incubadoradb);
+            _dbContext.Incubadoras.Remove(Incubadoradb);
             _dbContext.SaveChanges();
 
             return true;
         }
 
-        public List<IncubadoraModel> GetAll()
+        public List<Incubadora> GetAll()
         {
-            return _dbContext.incubadora.ToList();
+            var teste = _dbContext.Incubadoras.ToList();
+            return teste;
         }
 
-        public IncubadoraModel GetById(int id)
+        public Incubadora GetById(int id)
         {
-            return _dbContext.incubadora.FirstOrDefault(x => x.id_incubadora == id);
+            return _dbContext.Incubadoras.FirstOrDefault(x => x.id_incubadora == id);
         }
 
-        public IncubadoraModel Update(IncubadoraModel incubadora)
+        public Incubadora Update(Incubadora Incubadora)
         {
-            IncubadoraModel incubadoradb = GetById(incubadora.id_incubadora);
+            Incubadora Incubadoradb = GetById(Incubadora.id_incubadora);
 
-            if (incubadoradb == null)
+            if (Incubadoradb == null)
             {
                 throw new System.Exception("Hou um erro na atualização da Incubadora");
             }
 
-            incubadoradb.cod_incubadora = incubadora.cod_incubadora;
-            incubadoradb.temperatura_fixada = incubadora.temperatura_fixada;
+            Incubadoradb.cod_incubadora = Incubadora.cod_incubadora;
+            Incubadoradb.temperatura_fixada = Incubadora.temperatura_fixada;
 
-            _dbContext.incubadora.Update(incubadoradb);
+            _dbContext.Incubadoras.Update(Incubadoradb);
             _dbContext.SaveChanges();
 
-            return incubadoradb;
+            return Incubadoradb;
         }
     }
 }

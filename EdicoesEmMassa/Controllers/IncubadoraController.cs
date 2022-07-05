@@ -6,16 +6,16 @@ namespace EdicoesEmMassa.Controllers
 {
     public class IncubadoraController : Controller
     {
-        private readonly IIncubadoraRepository _incubadoraRepository;
+        private readonly IIncubadoraRepository _IncubadoraRepository;
 
-        public IncubadoraController(IIncubadoraRepository incubadoraRepository)
+        public IncubadoraController(IIncubadoraRepository IncubadoraRepository)
         {
-            _incubadoraRepository = incubadoraRepository;
+            _IncubadoraRepository = IncubadoraRepository;
         }
         public IActionResult Index()
         {
-            var incubadoras = _incubadoraRepository.GetAll();
-            return View(incubadoras);
+            var Incubadoras = _IncubadoraRepository.GetAll();
+            return View(Incubadoras);
         }
 
         public IActionResult Creating()
@@ -25,45 +25,45 @@ namespace EdicoesEmMassa.Controllers
 
         public IActionResult Update(int id)
         {
-            var Incubadora = _incubadoraRepository.GetById(id);
+            var Incubadora = _IncubadoraRepository.GetById(id);
             return View(Incubadora);
         }
 
         public IActionResult ConfirmDelete(int id)
         {
-            var Incubadora = _incubadoraRepository.GetById(id);
+            var Incubadora = _IncubadoraRepository.GetById(id);
             return View(Incubadora);
         }
         public IActionResult Delete(int id)
         {
-            _incubadoraRepository.Delete(id);
+            _IncubadoraRepository.Delete(id);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult Creating(IncubadoraModel incubadora)
+        public IActionResult Creating(Incubadora Incubadora)
         {
 
             if (ModelState.IsValid)
             {
-                _incubadoraRepository.Creating(incubadora);
+                _IncubadoraRepository.Creating(Incubadora);
                 return RedirectToAction("Index");
             }
 
-            return View(incubadora);
+            return View(Incubadora);
 
         }
 
         [HttpPost]
-        public IActionResult Update(IncubadoraModel incubadora)
+        public IActionResult Update(Incubadora Incubadora)
         {
             if (ModelState.IsValid)
             {
-                _incubadoraRepository.Update(incubadora);
+                _IncubadoraRepository.Update(Incubadora);
                 return RedirectToAction("Index");
             }
 
-            return View(incubadora);
+            return View(Incubadora);
 
         }
     }

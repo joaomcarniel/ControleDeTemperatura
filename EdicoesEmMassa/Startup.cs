@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Pomelo.EntityFrameworkCore.MySql;
 using System;
 
 namespace EdicoesEmMassa
@@ -23,19 +24,9 @@ namespace EdicoesEmMassa
         {
             services.AddControllersWithViews();
             services.AddSwaggerGen();
+            var _connectionString = Configuration.GetConnectionString("DataBase").ToString();
+            services.AddDbContext<jupiterContext>(o => o.UseMySql(_connectionString,ServerVersion.AutoDetect(_connectionString)));
 
-            var UseSQLServer = false;
-           if (UseSQLServer)
-            {
-                services.AddEntityFrameworkSqlServer()
-                .AddDbContext<bancoContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DataBase")));
-            }
-            else
-            {
-                services.AddDbContext<bancoContext>(options =>
-                    options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnectionString")));
-                    
-            }
 
             services.AddScoped<IIncubadoraRepository, IncubadoraRepository>();
             services.AddScoped<ITemperaturaRepository, TemperaturaRepository>();

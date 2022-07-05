@@ -9,45 +9,40 @@ namespace EdicoesEmMassa.Controllers
     public class DashboardController : Controller
     {
 
-        private readonly IIncubadoraRepository _incubadoraRepository;
-        private readonly ITemperaturaRepository _temperaturaRepository;
+        private readonly IIncubadoraRepository _IncubadoraRepository;
+        private readonly ITemperaturaRepository _TemperaturaRepository;
 
 
-        public DashboardController(IIncubadoraRepository incubadoraRepository, ITemperaturaRepository temperaturaRepository)
+        public DashboardController(IIncubadoraRepository IncubadoraRepository, ITemperaturaRepository TemperaturaRepository)
         {
-            _incubadoraRepository = incubadoraRepository;
-            _temperaturaRepository = temperaturaRepository;
+            _IncubadoraRepository = IncubadoraRepository;
+            _TemperaturaRepository = TemperaturaRepository;
         }
 
         public IActionResult Index()
         {
-            List<IncubadoraTemperaturaModel> _ITModel = new List<IncubadoraTemperaturaModel>();
-            IncubadoraModel incubModel = new IncubadoraModel();
-            TemperaturaModel tempModel = new TemperaturaModel();
-            while (true)
-            {
-                Thread.Sleep(50);
-                var temperaturas = _temperaturaRepository.GetAll();
-                var incubadoras = _incubadoraRepository.GetAll();
+            List<IncubadoraTemperatura> _ITModel = new List<IncubadoraTemperatura>();
+            Incubadora incubModel = new Incubadora();
+            Temperatura tempModel = new Temperatura();
+            var Temperaturas = _TemperaturaRepository.GetAll();
+            var Incubadoras = _IncubadoraRepository.GetAll();
 
-                foreach (var temperatura in temperaturas)
+            foreach (var Temperatura in Temperaturas)
+            {
+                foreach (var Incubadora in Incubadoras)
                 {
-                    foreach (var incubadora in incubadoras)
+                    if (Incubadora.id_incubadora == Temperatura.id_incubadora)
                     {
-                        if (incubadora.id_incubadora == temperatura.id_incubadora)
+                        IncubadoraTemperatura itModel = new IncubadoraTemperatura()
                         {
-                            IncubadoraTemperaturaModel itModel = new IncubadoraTemperaturaModel()
-                            {
-                                temperatura = temperatura,
-                                incubadora = incubadora
-                            };
-                            _ITModel.Add(itModel);
-                        }
+                            Temperatura = Temperatura,
+                            Incubadora = Incubadora
+                        };
+                        _ITModel.Add(itModel);
                     }
                 }
-                return View(_ITModel);
             }
-            
+            return View(_ITModel);
         }
     }
 }
