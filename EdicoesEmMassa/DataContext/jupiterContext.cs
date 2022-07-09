@@ -18,6 +18,7 @@ namespace EdicoesEmMassa.DataContext
         {
         }
 
+        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Incubadora> Incubadoras { get; set; }
         public virtual DbSet<Temperatura> Temperaturas { get; set; }
 
@@ -34,6 +35,31 @@ namespace EdicoesEmMassa.DataContext
         {
             modelBuilder.HasCharSet("utf8mb4")
                 .UseCollation("utf8mb4_0900_ai_ci");
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(e => e.IdUser)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("user");
+
+                entity.Property(e => e.IdUser).HasColumnName("id_user");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .HasColumnName("name");
+
+                entity.Property(e => e.UserName)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .HasColumnName("user_name");
+
+                entity.Property(e => e.UserPass)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .HasColumnName("user_pass");
+            });
 
             modelBuilder.Entity<Incubadora>(entity =>
             {

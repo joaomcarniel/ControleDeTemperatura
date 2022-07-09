@@ -1,5 +1,6 @@
 using EdicoesEmMassa.DataContext;
 using EdicoesEmMassa.Repository;
+using EdicoesEmMassa.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,8 @@ namespace EdicoesEmMassa
 
             services.AddScoped<IIncubadoraRepository, IncubadoraRepository>();
             services.AddScoped<ITemperaturaRepository, TemperaturaRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ILoginService, LoginService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +60,7 @@ namespace EdicoesEmMassa
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }
