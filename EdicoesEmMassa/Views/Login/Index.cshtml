@@ -1,16 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Login";
+	Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
 <link rel="stylesheet" href="~/css/login-page.css" />
 
-<form asp-controller="Login" asp-action="ValidateLogin" method="post">
+<!--- <form asp-controller="Login" asp-action="ValidateLogin" method="post">
     <label>Nome do Usuário:</label>
     <input type="text" name="username"/>
     <label>Senha:</label>
     <input type="password" name="pass"/>
     <input type="submit" value="Enviar"
-</form>
+</form> -->
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
