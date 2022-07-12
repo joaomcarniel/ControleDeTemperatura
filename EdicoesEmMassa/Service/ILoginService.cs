@@ -1,7 +1,12 @@
-﻿namespace EdicoesEmMassa.Service
+﻿using EdicoesEmMassa.Model;
+using System.Security.Claims;
+
+namespace EdicoesEmMassa.Service
 {
     public interface ILoginService
     {
-        public bool ValidateLogin(string userName, string senha);
+        public ClaimsPrincipal ValidateLogin(string userName, string senha);
+
+        public ClaimsPrincipal GetClaims(User user);
     }
 }

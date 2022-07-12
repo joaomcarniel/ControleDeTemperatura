@@ -1,6 +1,7 @@
 using EdicoesEmMassa.DataContext;
 using EdicoesEmMassa.Repository;
 using EdicoesEmMassa.Service;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,13 +27,20 @@ namespace EdicoesEmMassa
             services.AddControllersWithViews();
             services.AddSwaggerGen();
             var _connectionString = Configuration.GetConnectionString("DataBase").ToString();
-            services.AddDbContext<jupiterContext>(o => o.UseMySql(_connectionString,ServerVersion.AutoDetect(_connectionString)));
-
+            services.AddDbContext<jupiterContext>(o => o.UseMySql(_connectionString, ServerVersion.AutoDetect(_connectionString)));
 
             services.AddScoped<IIncubadoraRepository, IncubadoraRepository>();
             services.AddScoped<ITemperaturaRepository, TemperaturaRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILoginService, LoginService>();
+
+            services.AddAuthentication("Identity.Login").AddCookie("Identity.Login", config =>
+            {
+                config.Cookie.Name = "Identity.Login";
+                config.LoginPath = "/Login";
+                config.AccessDeniedPath = "/Home";
+                config.ExpireTimeSpan = TimeSpan.FromHours(1);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +61,8 @@ namespace EdicoesEmMassa
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

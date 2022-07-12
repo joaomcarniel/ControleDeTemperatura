@@ -1,6 +1,11 @@
 ﻿using EdicoesEmMassa.Model;
 using EdicoesEmMassa.Repository;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication;
 using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace EdicoesEmMassa.Service
 {
@@ -13,11 +18,21 @@ namespace EdicoesEmMassa.Service
             _userRepository = userRepository;
         }
 
-        public bool ValidateLogin(string userName, string password)
+        public ClaimsPrincipal ValidateLogin(string userName, string password)
         {
             User user = _userRepository.GetUser(userName);
-            return (user.UserName == userName & user.UserPass == password);
+            return GetClaims(user);
+        }
 
+        public ClaimsPrincipal GetClaims(User user)
+        {
+            List<Claim> access = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.IdUser.ToString()),
+                new Claim(ClaimTypes.Name, user.Name)
+            };
+            var identity = new ClaimsIdentity(access, "Identity.Login");
+            return new ClaimsPrincipal(new[] { identity }); 
         }
     }
 }
