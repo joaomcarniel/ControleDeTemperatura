@@ -38,7 +38,7 @@ namespace EdicoesEmMassa.Controllers
                 return RedirectToAction("Index", "Dashboard");
 
             }
-            return Json(new {message = "Usuário não encontrado, verifique suas credenciais!"});
+            return View("Index");
         }
 
         public async Task<IActionResult> Logout()

@@ -20,8 +20,16 @@ namespace EdicoesEmMassa.Service
 
         public ClaimsPrincipal ValidateLogin(string userName, string password)
         {
-            User user = _userRepository.GetUser(userName);
-            return GetClaims(user);
+            try
+            {
+                User user = _userRepository.GetUser(userName, password);
+                return GetClaims(user);
+            }
+            catch
+            {
+                return null;
+            }
+            
         }
 
         public ClaimsPrincipal GetClaims(User user)

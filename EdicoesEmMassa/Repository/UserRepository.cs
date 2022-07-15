@@ -11,9 +11,9 @@ namespace EdicoesEmMassa.Repository
         {
             _dbContext = dbContext;
         }
-        public User GetUser(string userName)
+        public User GetUser(string userName, string password)
         {
-            return _dbContext.Users.FirstOrDefault(x => x.UserName == userName);
+            return _dbContext.Users.FirstOrDefault(x => x.UserName == userName && x.UserPass == password);
         }
     }
 }

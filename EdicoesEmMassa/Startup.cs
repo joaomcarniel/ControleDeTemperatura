@@ -33,6 +33,7 @@ namespace EdicoesEmMassa
             services.AddScoped<ITemperaturaRepository, TemperaturaRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IRelatorioService, RelatorioService>();
 
             services.AddAuthentication("Identity.Login").AddCookie("Identity.Login", config =>
             {

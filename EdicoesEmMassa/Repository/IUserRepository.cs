@@ -4,6 +4,6 @@ namespace EdicoesEmMassa.Repository
 {
     public interface IUserRepository
     {
-        User GetUser(string userName);
+        User GetUser(string userName, string password);
     }
 }

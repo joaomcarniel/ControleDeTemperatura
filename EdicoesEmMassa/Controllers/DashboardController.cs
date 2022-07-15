@@ -24,7 +24,7 @@ namespace EdicoesEmMassa.Controllers
             List<IncubadoraTemperatura> _ITModel = new List<IncubadoraTemperatura>();
             Incubadora incubModel = new Incubadora();
             Temperatura tempModel = new Temperatura();
-            var Temperaturas = _TemperaturaRepository.GetAll();
+            var Temperaturas = _TemperaturaRepository.GetLastTemperatura();
             var Incubadoras = _IncubadoraRepository.GetAll();
 
             foreach (var Temperatura in Temperaturas)
