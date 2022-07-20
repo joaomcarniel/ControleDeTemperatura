@@ -1,8 +1,11 @@
-﻿namespace EdicoesEmMassa.Service
+﻿using EdicoesEmMassa.Model;
+using System.Collections.Generic;
+
+namespace EdicoesEmMassa.Service
 {
     public interface IRelatorioService
     {
         public void DeserializeTemperatura();
-        void CreatePDF(int qtdTemperatura);
+        void CreatePDF(List<Temperatura> selectedTemperature);
     }
 }
