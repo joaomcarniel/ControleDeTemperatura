@@ -1,5 +1,6 @@
 ﻿using EdicoesEmMassa.DataContext;
 using EdicoesEmMassa.Model;
+using EdicoesEmMassa.Model.Reports;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace EdicoesEmMassa.Repository
         }
         public List<Temperatura> GetLastTemperatura()
         {
-            return _dbContext.Temperaturas.FromSqlRaw(@"SELECT id_temperatura, temperatura_atual, id_incubadora
+            return _dbContext.Temperaturas.FromSqlRaw(@"SELECT id_temperatura, temperatura_atual, id_incubadora, update_date
                 FROM temperatura JOIN (SELECT MAX(id_temperatura) as ""ultimoId""
                 FROM temperatura GROUP BY id_incubadora) as sub
                 ON sub.ultimoId = temperatura.id_temperatura").ToList();
@@ -29,5 +30,12 @@ namespace EdicoesEmMassa.Repository
         {
             return _dbContext.Temperaturas.ToList();
         }
+
+        public List<TemperatureReportModel> GetTemperatureReport()
+        {
+            return _dbContext.TemperatureReport.FromSqlRaw("SELECT t.id_temperatura, t.id_incubadora, t.update_date, i.temperatura_fixada, " +
+                "i.cod_incubadora, t.temperatura_atual FROM temperatura t LEFT JOIN incubadora i ON t.id_incubadora = i.id_incubadora;").ToList();
+        }
+
     }
 }

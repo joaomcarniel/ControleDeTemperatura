@@ -1,5 +1,6 @@
 ﻿using System;
 using EdicoesEmMassa.Model;
+using EdicoesEmMassa.Model.Reports;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -21,6 +22,7 @@ namespace EdicoesEmMassa.DataContext
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Incubadora> Incubadoras { get; set; }
         public virtual DbSet<Temperatura> Temperaturas { get; set; }
+        public virtual DbSet<TemperatureReportModel> TemperatureReport { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

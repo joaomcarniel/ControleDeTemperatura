@@ -1,5 +1,6 @@
 ﻿using EdicoesEmMassa.Helper;
 using EdicoesEmMassa.Model;
+using EdicoesEmMassa.Model.Reports;
 using EdicoesEmMassa.Repository;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
@@ -15,25 +16,31 @@ namespace EdicoesEmMassa.Service
     {
         static BaseFont fontBase = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, false);
         private readonly ITemperaturaRepository _temperaturaRepository;
-        public RelatorioService(ITemperaturaRepository temperaturaRepository)
+        private readonly IIncubadoraRepository _incubadoraRepository;
+        
+        public RelatorioService(ITemperaturaRepository temperaturaRepository, IIncubadoraRepository incubadoraRepository)
         {
             _temperaturaRepository = temperaturaRepository;
+            _incubadoraRepository = incubadoraRepository;
         }
         public void DeserializeTemperatura()
         {
-            var temperaturas = _temperaturaRepository.GetAll();
-            var jsonTemperaturas = JsonConvert.SerializeObject(temperaturas);
-            CreatePDF(temperaturas);
+            
+            //var temperatures = _temperaturaRepository.GetAll();
+            //var incubators = _incubadoraRepository.GetAll();
+            var temperatureReport = _temperaturaRepository.GetTemperatureReport();
+
+            CreatePDF(temperatureReport);
         }
 
-        public void CreatePDF(List<Temperatura> selectedTemperature)
+        public void CreatePDF(List<TemperatureReportModel> temperatureReport)
         {
             var totalPages = 1;
-            int totalLines = selectedTemperature.Count;
+            int totalLines = temperatureReport.Count;
             if (totalLines > 24)
                 totalPages += (int)Math.Ceiling((totalLines - 24) / 29F);
             var pxPorMm = 72 / 25.2F;
-            var pdf = new Document(PageSize.A4, 15 * pxPorMm, 15 * pxPorMm, 15 * pxPorMm, 20 * pxPorMm);
+            var pdf = new Document(PageSize.A4.Rotate(), 15 * pxPorMm, 15 * pxPorMm, 15 * pxPorMm, 20 * pxPorMm);
             var fileName = $"temperaturas{DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss")}.pdf";
             var file = new FileStream(fileName, FileMode.Create);
             var writer = PdfWriter.GetInstance(pdf, file);
@@ -45,8 +52,8 @@ namespace EdicoesEmMassa.Service
             title.Alignment = Element.ALIGN_LEFT;
             title.SpacingAfter = 4;
             pdf.Add(title);
-            var table = new PdfPTable(5);
-            float[] columnsWidth = { 0.6f, 2f, 1.5f, 1f, 1f };
+            var table = new PdfPTable(6);
+            float[] columnsWidth = { 1f, 0.7f, 1.5f, 0.8f, 1f, 0.8f };
             table.SetWidths(columnsWidth);
             table.DefaultCell.BorderWidth = 0;
             table.WidthPercentage = 100;
@@ -54,17 +61,19 @@ namespace EdicoesEmMassa.Service
 
             CreateTextCelula(table, "IdTemperatura", PdfPCell.ALIGN_CENTER, true);
             CreateTextCelula(table, "IdIncubadora", PdfPCell.ALIGN_CENTER, true);
+            CreateTextCelula(table, "Horário", PdfPCell.ALIGN_CENTER, true);
+            CreateTextCelula(table, "Temp Ideal", PdfPCell.ALIGN_CENTER, true);
+            CreateTextCelula(table, "Cód Incubadora", PdfPCell.ALIGN_CENTER, true);
             CreateTextCelula(table, "Temperatura Atual", PdfPCell.ALIGN_CENTER, true);
-            CreateTextCelula(table, "Código", PdfPCell.ALIGN_CENTER, true);
-            CreateTextCelula(table, "Código", PdfPCell.ALIGN_CENTER, true);
 
-            foreach(var t in selectedTemperature)
+            foreach(var t in temperatureReport)
             {
-                CreateTextCelula(table, t.id_temperatura.ToString("D6"), PdfPCell.ALIGN_CENTER);
+                CreateTextCelula(table, t.id_temperatura   .ToString("D6"), PdfPCell.ALIGN_CENTER);
                 CreateTextCelula(table, t.id_incubadora.ToString(), PdfPCell.ALIGN_CENTER);
+                CreateTextCelula(table, t.update_date.ToString(), PdfPCell.ALIGN_CENTER);
+                CreateTextCelula(table, t.temperatura_fixada.ToString(), PdfPCell.ALIGN_CENTER);
+                CreateTextCelula(table, t.cod_incubadora.ToString(), PdfPCell.ALIGN_CENTER);
                 CreateTextCelula(table, t.temperatura_atual.ToString(), PdfPCell.ALIGN_CENTER);
-                CreateTextCelula(table, "Código", PdfPCell.ALIGN_CENTER);
-                CreateTextCelula(table, "Código", PdfPCell.ALIGN_CENTER);
             }
 
             pdf.Add(table);
@@ -120,6 +129,11 @@ namespace EdicoesEmMassa.Service
             celula.PaddingBottom = 5;
             celula.BackgroundColor = bgColor;
             table.AddCell(celula);
+        }
+
+        public void GetDataTemperatureReport(List<Temperatura> temperatures, List<Incubadora> incubators)
+        {
+
         }
     }
 }
