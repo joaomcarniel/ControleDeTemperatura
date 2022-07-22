@@ -19,8 +19,6 @@ namespace EdicoesEmMassa.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Dashboard");
-                //return Json(new { message = "Usuário Logado Com Sucesso!" });
-
             }
             return View();
         }
