@@ -1,20 +1,21 @@
 ﻿using EdicoesEmMassa.Model;
 using EdicoesEmMassa.Repository;
+using EdicoesEmMassa.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EdicoesEmMassa.Controllers
 {
     public class IncubadoraController : Controller
     {
-        private readonly IIncubadoraRepository _IncubadoraRepository;
+        private readonly IIncubatorService _incubatorService;
 
-        public IncubadoraController(IIncubadoraRepository IncubadoraRepository)
+        public IncubadoraController(IIncubatorService incubatorService)
         {
-            _IncubadoraRepository = IncubadoraRepository;
+            _incubatorService = incubatorService;
         }
         public IActionResult Index()
         {
-            var Incubadoras = _IncubadoraRepository.GetAll();
+            var Incubadoras = _incubatorService.GetAll();
             return View(Incubadoras);
         }
 
@@ -25,18 +26,19 @@ namespace EdicoesEmMassa.Controllers
 
         public IActionResult Update(int id)
         {
-            var Incubadora = _IncubadoraRepository.GetById(id);
+            var Incubadora = _incubatorService.GetById(id);
             return View(Incubadora);
         }
 
         public IActionResult ConfirmDelete(int id)
         {
-            var Incubadora = _IncubadoraRepository.GetById(id);
+            var Incubadora = _incubatorService.GetById(id);
             return View(Incubadora);
         }
         public IActionResult Delete(int id)
         {
-            _IncubadoraRepository.Delete(id);
+
+            _incubatorService.Delete(id);
             return RedirectToAction("Index");
         }
 
@@ -46,7 +48,7 @@ namespace EdicoesEmMassa.Controllers
 
             if (ModelState.IsValid)
             {
-                _IncubadoraRepository.Creating(Incubadora);
+                _incubatorService.Creating(Incubadora);
                 return RedirectToAction("Index");
             }
 
@@ -59,7 +61,7 @@ namespace EdicoesEmMassa.Controllers
         {
             if (ModelState.IsValid)
             {
-                _IncubadoraRepository.Update(Incubadora);
+                _incubatorService.Update(Incubadora);
                 return RedirectToAction("Index");
             }
 

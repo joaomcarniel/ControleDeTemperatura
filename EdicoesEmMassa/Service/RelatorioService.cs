@@ -25,11 +25,7 @@ namespace EdicoesEmMassa.Service
         }
         public void DeserializeTemperatura()
         {
-            
-            //var temperatures = _temperaturaRepository.GetAll();
-            //var incubators = _incubadoraRepository.GetAll();
             var temperatureReport = _temperaturaRepository.GetTemperatureReport();
-
             CreatePDF(temperatureReport);
         }
 

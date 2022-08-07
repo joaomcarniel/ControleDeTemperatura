@@ -1,6 +1,7 @@
 ﻿using EdicoesEmMassa.Repository;
 using EdicoesEmMassa.Service;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace EdicoesEmMassa.Controllers
 {
@@ -18,9 +19,10 @@ namespace EdicoesEmMassa.Controllers
             return View();
         }
 
-        public void CreatePDF()
+        public IActionResult CreatePDF()
         {
             _TemperaturaRepository.DeserializeTemperatura();
+            return RedirectToAction("Index", "Dashboard");
         }
     }
 }
