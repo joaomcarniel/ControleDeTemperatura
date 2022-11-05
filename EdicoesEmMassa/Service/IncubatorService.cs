@@ -35,6 +35,7 @@ namespace EdicoesEmMassa.Service
             try
             {
                 _incubadoraRepository.Delete(id);
+
             }catch(Exception e)
             {
 
