@@ -4,7 +4,6 @@ using EdicoesEmMassa.Model.Reports;
 using EdicoesEmMassa.Repository;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
