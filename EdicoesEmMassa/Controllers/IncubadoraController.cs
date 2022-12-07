@@ -66,7 +66,6 @@ namespace EdicoesEmMassa.Controllers
             }
 
             return View(Incubadora);
-
         }
     }
 }

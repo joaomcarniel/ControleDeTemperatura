@@ -39,9 +39,7 @@ namespace EdicoesEmMassa.Service
             }catch(Exception e)
             {
 
-            }
-            
+            } 
         }
-
     }
 }
